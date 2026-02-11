@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Kuttibums 🤍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffdce8, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+}
+
+/* Card */
+.card {
+    background: #ffffff;
+    padding: 50px 60px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(139, 94, 60, 0.15);
+    text-align: center;
+    position: relative;
+    border: 2px solid #f3d1dc;
+    max-width: 400px;
+}
+
+/* Minimal corner hearts */
+.card::before {
+    content: "♡";
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    font-size: 26px;
+    color: #d9a5b3;
+}
+
+.card::after {
+    content: "♡";
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    font-size: 26px;
+    color: #d9a5b3;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #8b5e3c;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #8b5e3c;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+button {
+    padding: 12px 28px;
+    border-radius: 30px;
+    border: none;
+    font-size: 15px;
+    margin: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* YES */
+#yes {
+    background: #d9a5b3;
+    color: white;
+}
+
+#yes:hover {
+    transform: scale(1.08);
+}
+
+/* NO */
+#no {
+    background: #8b5e3c;
+    color: white;
+    position: fixed;
+}
+
+/* Explosion */
+.explosion {
+    position: fixed;
+    font-size: 55px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: boom 0.9s forwards;
+}
+
+@keyframes boom {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+}
+
+/* Love message */
+.love-message {
+    margin-top: 25px;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #8b5e3c;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Kuttibums 🤍</h1>
+    <p>Will you be mine? [mudinja no solli paaru]</p>
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const card = document.querySelector(".card");
+
+/* Teleport NO button (never leaves screen) */
+noBtn.addEventListener("mouseenter", function() {
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+});
+
+/* YES button */
+yesBtn.addEventListener("click", function() {
+
+    // Explosion effect
+    const explosion = document.createElement("div");
+    explosion.className = "explosion";
+    explosion.innerHTML = "💖✨💖";
+    document.body.appendChild(explosion);
+
+    setTimeout(function() {
+        explosion.remove();
+
+        yesBtn.style.display = "none";
+        noBtn.style.display = "none";
+
+        const message = document.createElement("div");
+        message.className = "love-message";
+        message.innerHTML = "I KNEW YOU'D SAY YES!!!<br><br>i love you kuttibums, more than you could ever imagine 🤍";
+        card.appendChild(message);
+
+        setTimeout(() => {
+            message.style.opacity = "1";
+        }, 100);
+
+    }, 900);
+});
+</script>
+
+</body>
+</html>
